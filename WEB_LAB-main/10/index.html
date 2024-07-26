@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prime Number Checker</h1>
+    <input type="number" id="numberInput" placeholder="Enter a number" />
+    <button onclick="checkPrime()">Check</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        function isPrime(num) {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+
+            if (num % 2 === 0 || num % 3 === 0) return false;
+
+            for (let i = 5; i * i <= num; i += 6) {
+                if (num % i === 0 || num % (i + 2) === 0) return false;
+            }
+
+            return true;
+        }
+
+        function checkPrime() {
+            const input = document.getElementById('numberInput').value;
+            const number = parseInt(input, 10);
+            const resultElement = document.getElementById('result');
+
+            if (isNaN(number)) {
+                resultElement.textContent = "Please enter a valid number.";
+            } else if (isPrime(number)) {
+                resultElement.textContent = number + " is a prime number.";
+            } else {
+                resultElement.textContent = number + " is not a prime number.";
+            }
+        }
+    </script>
+</body>
+</html>
